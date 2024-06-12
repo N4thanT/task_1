@@ -1,0 +1,35 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather in Kuressaare</title>
+</head>
+<body>
+    <h1>Weather Information for Kuressaare</h1>
+    <div id="weather"></div>
+    <script>
+        function fetchWeather() {
+            fetch('#') // link to backend,, stuff
+                .then(response => response.json())
+                .then(data => {
+                    const weatherDiv = document.getElementById('weather');
+                    const weatherData = `
+                        <p>Temperature: ${data.main.temp}°C</p>
+                        <p>Weather: ${data.weather[0].main}</p>
+                        <p>Humidity: ${data.main.humidity}%</p>
+                    `;
+                    weatherDiv.innerHTML = weatherData;
+                })
+                // look at that, error stuff, how fun
+                .catch(error => {
+                    console.error('Error fetching weather:', error);
+                    document.getElementById('weather').innerHTML = '<p>Error fetching weather data.</p>';
+                });
+        }
+
+        fetchWeather();
+    </script>
+</body>
+</html>
